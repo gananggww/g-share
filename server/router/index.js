@@ -5,8 +5,9 @@ const controll = require('../controller/index');
 
 router.get('/', controll.findAll)
 router.post('/', controll.uploadFile)
-router.get('/:id', controller.findFile)
-router.put('/:id', controller.updateFile)
-router.delete('/:id', controller.deleteFile)
+router.get('/:id', controll.findFile)
+router.put('/:id', controll.updateFile)
+router.delete('/:id', controll.deleteFile)
+router.post('/upload', controll.uploadFile)
 
 module.exports = router
