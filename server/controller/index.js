@@ -1,5 +1,11 @@
 const dotenv = require('dotenv').config();
-const dbmodel = require('..models/index');
+const dbmodel = require('../model/index');
+var gcs = require('@google-cloud/storage')({
+  projectId: 'yomos-177809',
+  keyFilename: './yomos-5cd33efe4eda.json'
+});
+var bucket = gcs.bucket('test-bucket-g-share');
+
 
 var findAll = (req, res)=>{
   dbmodel.find()
@@ -61,6 +67,24 @@ var deleteFile = (req, res)=>{
   })
 }
 
-model.exports = {
+var uploadFile = (req,res)=>{
+  bucket.upload(req.body.upload, function(err, file) {
+    if (!err) {
+      var hasil = {
+        log : 'Photo Masuk',
+        url : file.metadata.selfLink,
+        size : file.metadata.size,
+        type : file.metadata.contentType
+      }
+      console.log('berhasil mashuk', hasil);
+      res.send(hasil)
+    }else {
+      console.log(err);
+      res.send(err)
+    }
+  });
+}
+
+module.exports = {
   findAll, uploadFile, findFile, updateFile, deleteFile
 }
