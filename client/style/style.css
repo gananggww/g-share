@@ -18,6 +18,9 @@
   border-color: #222;
 }
 
+.modal-dialog {
+  width: 65% !important;
+}
 
 
 .image-preview-input {
