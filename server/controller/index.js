@@ -17,19 +17,6 @@ var findAll = (req, res)=>{
   })
 }
 
-var uploadFile = (req, res)=>{
-  dbmodel.create({
-    example : req.body.example,
-    example : req.body.example
-  })
-  .then(()=>{
-    res.send("Upload Access")
-  })
-  .catch(error =>{
-    res.send(error)
-  })
-}
-
 var findFile = (req, res)=>{
   dbmodel.findById({_id:req.params.id})
   .then((file)=>{
@@ -68,21 +55,14 @@ var deleteFile = (req, res)=>{
 }
 
 var uploadFile = (req,res)=>{
-  bucket.upload(req.body.upload, function(err, file) {
-    if (!err) {
-      var hasil = {
-        log : 'Photo Masuk',
-        url : file.metadata.selfLink,
-        size : file.metadata.size,
-        type : file.metadata.contentType
-      }
-      console.log('berhasil mashuk', hasil);
-      res.send(hasil)
-    }else {
-      console.log(err);
-      res.send(err)
-    }
-  });
+  let data = req.body;
+
+  if (req.file && req.file.cloudStoragePublicUrl) {
+      data.imageUrl = req.file.cloudStoragePublicUrl;
+      res.send(data.imageUrl)
+  }else {
+    res.send(req.file.cloudStorageError)
+  }
 }
 
 module.exports = {
