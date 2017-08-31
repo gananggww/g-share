@@ -10,12 +10,12 @@ var app = new Vue({
   el: '#app',
   data: {
     allfile:[],
-    image: ''
+    image: '',
   },
   methods:{
     findAll(){
       var self = this
-      axios.get(`http://localhost:3000`)
+      axios.get(`http://35.187.238.95:3000`)
       .then((files)=>{
         console.log(files.data);
         self.allfile = files.data
@@ -29,7 +29,7 @@ var app = new Vue({
       var formData = new FormData()
       formData.append('image', document.getElementById('filename').files[0]);
       console.log(formData);
-      axios.post('http://localhost:3000/upload',formData)
+      axios.post('http://35.187.238.95:3000/upload',formData)
       .then(function (response) {
         console.log(response);
         self.allfile.push(response.data)
@@ -70,7 +70,7 @@ var app = new Vue({
     },
     deleteData(id,index){
       var self = this
-      axios.delete(`http://localhost:3000/${id}`)
+      axios.delete(`http://35.187.238.95:3000/${id}`)
       .then(response=>{
         console.log(response.data);
         self.allfile.splice(index, 1)
@@ -84,13 +84,14 @@ var app = new Vue({
     this.findAll()
   },
   computed:{
-    search(){
-      var search = $("input[name='search']")
-      search.keyup(function (){
-        let keyword = $(this).val();
-        axios.get(`http://localhost:3000/search/${keyword}`)
-        .then()
-      }
+    search: function(){
+      // var value = this.findAll()
+      // var value = $(this).val()
+      var self = this
+      return self.allfile.filter(value=>{
+        console.log(value);
+        // return value.filename.toLowerCase().indexOf(self.searchname)>=0;
+      })
     }
   }
 })
