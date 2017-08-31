@@ -1,11 +1,5 @@
 const dotenv = require('dotenv').config();
 const dbmodel = require('../model/index');
-var gcs = require('@google-cloud/storage')({
-  projectId: 'yomos-177809',
-  keyFilename: './yomos-5cd33efe4eda.json'
-});
-var bucket = gcs.bucket('test-bucket-g-share');
-
 
 var findAll = (req, res)=>{
   dbmodel.find()
@@ -53,16 +47,27 @@ var deleteFile = (req, res)=>{
     res.send(error)
   })
 }
+function bytesToSize(bytes) {
+   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+   if (bytes == 0) return '0 Byte';
+   var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+   return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
 
 var uploadFile = (req,res)=>{
-  let data = req.body;
+  dbmodel.create({
+    url : req.file.cloudStoragePublicUrl,
+    filename: req.file.cloudStorageObject,
+    type : req.file.mimetype,
+    size : bytesToSize(req.file.size)
+  })
+  .then((data)=>{
+    res.send(data)
+  })
+  .catch(error =>{
+    res.send(error)
+  })
 
-  if (req.file && req.file.cloudStoragePublicUrl) {
-      data.imageUrl = req.file.cloudStoragePublicUrl;
-      res.send(data.imageUrl)
-  }else {
-    res.send(req.file.cloudStorageError)
-  }
 }
 
 module.exports = {
