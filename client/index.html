@@ -79,7 +79,6 @@
                               			</table>
                               		</div>
                               	</div>
-
                               </div>
                               <br />
 
@@ -128,22 +127,25 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th >File</th>
-                  <th>Updated</th>
-                  <th>Jenis</th>
-                  <th>Ukuran</th>
+                  <th>No</th>
+                  <th>Filename</th>
+                  <th>Upload Date</th>
+                  <th>File Type</th>
+                  <th>File Size</th>
                   <th>Download</th>
                   <th>Delete</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody v-for="(file, index) in allfile">
                 <tr>
-                  <td>adnin-rais.3gp</td>
-                  <td>23-05-2017</td>
-                  <td>JPEG</td>
-                  <td>300 KB</td>
+                  <td> {{index+1}} </td>
+                  <td> {{file.filename}} </td>
+                  <td> {{file.date}} </td>
+                  <td> {{file.type}} </td>
+                  <td> {{file.size}} </td>
                   <td>
-                      <button type="button"class="btn btn-default btn-sm">
+                    <!-- <a v-bind:href="file.url" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-cloud-download"></span> Download</a> -->
+                      <button type="button" class="btn btn-default btn-sm" >
                       <span class="glyphicon glyphicon-cloud-download"></span> Download</button>
                   </td>
                   <td>
@@ -159,8 +161,8 @@
     </div>
   </div>
 
-  <script src="./assets/vue.js"></script>
-  <script src="./assets/jquery.js"></script>
+  <script src="/js/vue.js"></script>
+  <script src="/assets/jquery.js"></script>
 
   </body>
 </html>
