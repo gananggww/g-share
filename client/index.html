@@ -38,18 +38,18 @@
 
                   <!-- Standar Form -->
                   <h4>Select files from your computer</h4>
-                  <form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
+                  <form method="post" enctype="multipart/form-data" >
                     <div class="form-inline">
                       <div class="form-group">
-                        <input type="file" name="files[]" id="js-upload-files" multiple>
+                        <input class="form-control" type="file" id="filename" multiple>
                       </div>
-                      <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
+                      <button type="button" class="btn btn-sm btn-primary" @click='uploadData'>Upload files</button>
                     </div>
                   </form>
 
                   <!-- Drop Zone -->
                   <h4>Or drag and drop files below</h4>
-                  <div class="upload-drop-zone" id="drop-zone">
+                  <div class="upload-drop-zone" id="drop-zone" @change='uploadDataDrag'>
                     Just drag and drop files here
                   </div>
 
