@@ -1,8 +1,7 @@
 var app = new Vue({
   el: '#app',
   data: {
-    allfile:[],
-    message : ''
+    allfile:[]
   },
   methods:{
     findAll(){
@@ -10,7 +9,6 @@ var app = new Vue({
       axios.get(`http://localhost:3000`)
       .then((files)=>{
         console.log(files.data);
-        self.message = "apa adanya"
         self.allfile = files.data
       })
       .catch(error =>{
@@ -20,8 +18,18 @@ var app = new Vue({
     uploadData(){
 
     },
-    downloadData(){
-
+    getData(){
+      var self = this
+      // return response()->download('...path to download file...');
+      // return response()->download($pathToFile, $name, $headers);
+      const getImagesUrl = self.$store.state.website + '/get-requested-user-Images/';
+      selft.$http.get(getImagesUrl)
+        .then((response)=> {
+            console.log(response.data);
+        })
+        .catch((error)=> {
+            res.send(error)
+        });
     },
     deleteData(){
 
