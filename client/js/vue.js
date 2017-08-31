@@ -44,11 +44,29 @@ var app = new Vue({
             res.send(error)
         });
     },
-    deleteData(){
-
+    deleteData(id,index){
+      var self = this
+      axios.delete(`http://localhost:3000/${id}`)
+      .then(response=>{
+        console.log(response.data);
+        self.allfile.splice(index, 1)
+      })
+      .catch(err=>{
+        console.log(err);
+      })
     }
   },
   created(){
     this.findAll()
+  },
+  computed:{
+    search(){
+      var search = $("input[name='search']")
+      search.keyup(function (){
+        let keyword = $(this).val();
+        axios.get(`http://localhost:3000/search/${keyword}`)
+        .then()
+      }
+    }
   }
 })

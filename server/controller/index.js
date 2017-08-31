@@ -18,6 +18,16 @@ var findAll = (req, res)=>{
   })
 }
 
+var search = (req, res)=>{
+  dbmodel.find({filename : req.params.filename})
+  .then(files=>{
+    res.send(files)
+  })
+  .catch(err=>{
+    res.send(err)
+  })
+}
+
 var findFile = (req, res)=>{
   dbmodel.findById({_id:req.params.id})
   .then((file)=>{
