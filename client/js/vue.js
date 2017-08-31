@@ -1,7 +1,8 @@
 var app = new Vue({
   el: '#app',
   data: {
-    allfile:[]
+    allfile:[],
+    image: ''
   },
   methods:{
     findAll(){
@@ -15,8 +16,20 @@ var app = new Vue({
         res.send(error)
       })
     },
-    uploadData(){
-
+    uploadData(e){
+      var self = this
+      var formData = new FormData()
+      formData.append('image', document.getElementById('filename').files[0]);
+      console.log(formData);
+      axios.post('http://localhost:3000/upload',formData)
+      .then(function (response) {
+        console.log(response);
+        self.allfile.push(response.data)
+        $('#myModal').modal('hide')
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     },
     getData(){
       var self = this
