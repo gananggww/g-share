@@ -22,7 +22,7 @@ var app = new Vue({
       var self = this
       // return response()->download('...path to download file...');
       // return response()->download($pathToFile, $name, $headers);
-      const getImagesUrl = self.$store.state.website + '/get-requested-user-Images/';
+      const getImagesUrl = self.$store.state.website + '/download';
       selft.$http.get(getImagesUrl)
         .then((response)=> {
             console.log(response.data);
