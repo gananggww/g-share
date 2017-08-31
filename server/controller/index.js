@@ -19,7 +19,7 @@ var findAll = (req, res)=>{
 }
 
 var search = (req, res)=>{
-  dbmodel.find({filename : req.params.filename})
+  dbmodel.find({query : req.params.filename})
   .then(files=>{
     res.send(files)
   })
@@ -100,5 +100,5 @@ var downloadFile = (req,res)=>{
 }
 
 module.exports = {
-  findAll, uploadFile, findFile, updateFile, deleteFile, downloadFile
+  findAll, uploadFile, findFile, updateFile, deleteFile, downloadFile, search
 }

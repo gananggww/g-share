@@ -11,6 +11,6 @@ router.put('/:id', controll.updateFile)
 router.delete('/:id', controll.deleteFile)
 router.post('/upload', images.multer.single('image'), images.sendUploadToGCS, controll.uploadFile)
 router.post('/download',controll.downloadFile)
-router.get("/search/:filename", controll.search)
+router.get('/search/:filename', controll.search)
 
 module.exports = router
