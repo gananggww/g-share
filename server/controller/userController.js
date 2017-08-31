@@ -2,8 +2,8 @@ const ObjectId = require("mongodb").ObjectId
 const modelUser = require("../model/user")
 
 
-const login = (req, res)=>{
- modelUser.find({_id :ObjectId(req.params.id)})
+const getAll = (req, res)=>{
+ modelUser.find()
  .then(rows=>{
    res.send(rows)
  })
@@ -16,18 +16,30 @@ const register = (req, res)=>{
   modelUser.create({
     username : req.body.username,
     password : req.body.password,
-    nama : req.body.nama,
-    email : req.body.email,
-    telp : req.body.telp
+    email : req.body.email
   }).then(()=>{
     res.send("Berhasil menambahkan")
   })
   .catch(err=>{
-    res.send("Gagal menambahkan")
+    res.send(err)
+  })
+}
+
+const login = (req, res)=>{
+  modelUser.create({
+    username : req.body.username,
+    password : req.body.password,
+    email : req.body.email
+  }).then(()=>{
+    res.send("Berhasil menambahkan")
+  })
+  .catch(err=>{
+    res.send(err)
   })
 }
 
 module.exports = {
   login,
-  register
+  register,
+  getAll
 }

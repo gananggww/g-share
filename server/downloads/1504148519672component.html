@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://unpkg.com/vue"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title></title>
+  </head>
+  <body>
+
+    <h1>helloword</h1>
+    <div id="apps">
+      {{msg}}
+    </div>
+
+    <script>
+    Vue.component('student-list',{
+      template:`
+      `
+    })
+      var coba = new Vue({
+        el :"#apps",
+        data :{
+          msg :'hello word',
+          student :['vega', 'adnin','koko']
+        }
+      })
+
+    </script>
+  </body>
+</html>

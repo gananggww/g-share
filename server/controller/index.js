@@ -1,5 +1,12 @@
 const dotenv = require('dotenv').config();
 const dbmodel = require('../model/index');
+const CLOUD_BUCKET = 'g-ser';
+const Storage = require('@google-cloud/storage');
+const storage = Storage({
+  projectId: 'g-ser-178408',
+  keyFilename: 'g-ser-4149ee200697.json'
+});
+const bucket = storage.bucket(CLOUD_BUCKET);
 
 var findAll = (req, res)=>{
   dbmodel.find()
@@ -70,6 +77,18 @@ var uploadFile = (req,res)=>{
 
 }
 
+var downloadFile = (req,res)=>{
+  bucket.file(req.body.file).download({
+    destination: `downloads/${req.body.file}`
+  }, function(err){
+    if(!err){
+      res.send('download success')
+    }else {
+      res.send(err)
+    }
+  });
+}
+
 module.exports = {
-  findAll, uploadFile, findFile, updateFile, deleteFile
+  findAll, uploadFile, findFile, updateFile, deleteFile, downloadFile
 }
