@@ -1,3 +1,11 @@
+
+var dropzone = document.getElementById('drop-zone');
+dropzone.ondrop = function(data){
+  data.preventDefault();
+  this.className = 'upload-drop-zone';
+  // console.log(data.dataTransfer.files);
+  return data.dataTransfer.files
+}
 var app = new Vue({
   el: '#app',
   data: {
@@ -30,6 +38,22 @@ var app = new Vue({
       .catch(function (error) {
         console.log(error);
       });
+    },
+    uploadDataDrag(e){
+      var self = this
+      console.log('ini upload data drag',dropzone.ondrop());
+      // var formData = new FormData()
+      // formData.append('image', document.getElementById('filename').files[0]);
+      // console.log(formData);
+      // axios.post('http://localhost:3001/upload',formData)
+      // .then(function (response) {
+      //   console.log(response);
+      //   self.allfile.push(response.data)
+      //   $('#myModal').modal('hide')
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
     },
     getData(){
       var self = this

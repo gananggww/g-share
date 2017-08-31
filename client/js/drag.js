@@ -22,7 +22,8 @@
   dropzone.ondrop = function(data){
     data.preventDefault();
     this.className = 'upload-drop-zone';
-    console.log(data.dataTransfer.files);
+    // console.log(data.dataTransfer.files);
+    return data.dataTransfer.files
   }
 
   dropzone.ondragover = function(){
