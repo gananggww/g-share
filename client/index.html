@@ -52,9 +52,9 @@
                       						<span class="input-group-btn">
                       						<button type="button" class="btn btn-default file-preview-clear" style="display:none;"> <span class="glyphicon glyphicon-remove"></span> Clear </button>
                       						<div class="btn btn-default file-preview-input"> <span class="glyphicon glyphicon-folder-open"></span> <span class="file-preview-input-title">Browse</span>
-                      							<input type="file" accept="text/cfg" name="input-file-preview"/>
+                      							<input type="file" accept="text/cfg" name="input-file-preview"  id="filename"/>
                       						</div>
-                      						<button type="button" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Upload</button>
+                      						<button type="button" class="btn btn-labeled btn-primary" @click=uploadData > <span class="btn-label"><i class="glyphicon glyphicon-upload"></i> </span>Upload</button>
                       						</span>
                                 </div>
 
